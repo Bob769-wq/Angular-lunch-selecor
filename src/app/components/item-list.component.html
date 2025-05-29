@@ -1,0 +1,6 @@
+<div class="item-list">
+  @for (item of items; track $index) {
+  <button class="item-btn" [class.selected]="isSelected(item)" (click)="onSelect(item)">{{item}}
+  </button>
+  }
+</div>

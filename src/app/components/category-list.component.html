@@ -1,0 +1,6 @@
+@for (category of categories; track category.name) {
+<div class="category">
+  <h2>{{category.name}}</h2>
+  <app-item-list [items]="category.items" [selectedItem]="selectedItem" [onSelect]="onItemSelected"></app-item-list>
+</div>
+}
