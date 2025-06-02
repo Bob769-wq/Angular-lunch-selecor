@@ -1,0 +1,12 @@
+h3 {
+  cursor: pointer;
+  user-select: none;
+}
+
+h3:hover {
+  counter-reset: #007bff;
+}
+
+ul {
+  margin-left: 1rem;
+}

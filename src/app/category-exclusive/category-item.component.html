@@ -1,0 +1,13 @@
+<h3 (click)="toggle.emit()">
+  {{category()?.name}} ({{expanded()? 'expand': 'collapse'}})
+</h3>
+
+@if (expanded()) {
+<div>
+  <ul>
+    @for (item of category()?.items??[]; track item) {
+    <li>{{item}}</li>
+    }
+  </ul>
+</div>
+}
