@@ -2,8 +2,29 @@
   margin-bottom: 1.5rem;
 }
 
-.category h2 {
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: .5rem;
+}
+
+.category h2 {
+  margin: 0;
   color: #2b2b2b;
   font-size: 18px;
+}
+
+.category-header button {
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  background-color: #ddd;
+  border: none;
+  border-radius: 4px;
+  transition: all .2s;
+}
+
+.category-header button:hover {
+  background-color: #ccc;
 }

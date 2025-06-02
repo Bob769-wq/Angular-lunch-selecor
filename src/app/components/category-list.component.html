@@ -1,6 +1,14 @@
 @for (category of categories; track category.name) {
 <div class="category">
-  <h2>{{category.name}}</h2>
-  <app-item-list [items]="category.items" [selectedItem]="selectedItem" [onSelect]="onItemSelected"></app-item-list>
+  <div class="category-header">
+    <h2>{{category.name}}</h2>
+    <button (click)="toggle(category.name)">
+      {{isExpanded(category.name)? 'collapse':'expand'}}
+    </button>
+
+    @if (isExpanded(category.name)) {
+    <app-item-list [items]="category.items" [selectedItem]="selectedItem" [onSelect]="onItemSelected"></app-item-list>
+    }
+  </div>
 </div>
 }
