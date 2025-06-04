@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductListComponent } from './product-list.component';
 
@@ -13,9 +13,24 @@ import { ProductListComponent } from './product-list.component';
 export class CategoryCartComponent {
   products = signal(['Rice Ball', 'Dumpling', 'Ramen']);
 
+  cart = signal<{ name: string; quantity: number }[]>([]);
+
+  totalCount = computed(() =>
+    this.cart().reduce((sum, item) => sum + item.quantity, 0)
+  );
+
   addToCart(product: string) {
-    this.cart.update(cart => [...cart, product]);
+    this.cart.update(cart => {
+      const existing = cart.find(item => item.name === product);
+      if (existing) {
+        return cart.map(item =>
+          item.name === product ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      } else {
+        return [...cart, { name: product, quantity: 1 }];
+      }
+    });
   }
 
-  cart = signal<string[]>([]);
+
 }

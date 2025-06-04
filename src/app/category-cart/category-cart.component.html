@@ -1,9 +1,9 @@
 <h2>Category Cart Root</h2>
 <app-product-list [products]="products()" (add)="addToCart($event)"></app-product-list>
 
-<h3>Cart Items</h3>
+<h3>Cart Items (Total: {{totalCount()}})</h3>
 <ul>
-  @for (item of cart(); track $index) {
-  <li>{{item}}</li>
+  @for (item of cart(); track item.name) {
+  <li>{{item.name}} x {{item.quantity}}</li>
   }
 </ul>
