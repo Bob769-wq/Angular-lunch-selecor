@@ -20,4 +20,8 @@ export class CartItemComponent {
   subtract() {
     this.update.emit({ name: this.item()!.name, delta: -1 });
   }
+
+  deleteItem() {
+    this.update.emit({ name: this.item()!.name, delta: 0 });
+  }
 }

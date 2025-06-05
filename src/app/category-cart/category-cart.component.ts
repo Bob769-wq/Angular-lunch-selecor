@@ -35,6 +35,10 @@ export class CategoryCartComponent {
 
   handleQuantityChange(event: { name: string; delta: number }) {
     this.cart.update(cart => {
+      if (event.delta === 0) {
+        return cart.filter(item => item.name !== event.name);
+      }
+
       return cart.map(item =>
         item.name === event.name
           ? { ...item, quantity: item.quantity + event.delta }
