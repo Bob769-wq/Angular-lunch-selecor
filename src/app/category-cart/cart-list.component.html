@@ -1,0 +1,8 @@
+<h3>Cart Items</h3>
+
+<ul>
+  @for (item of items(); track item.name) {
+  <app-cart-item [item]="item" (update)="handleUpdate($event)">
+  </app-cart-item>
+  }
+</ul>

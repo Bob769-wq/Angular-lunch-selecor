@@ -1,11 +1,12 @@
 import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductListComponent } from './product-list.component';
+import { CartListComponent } from './cart-list.component';
 
 @Component({
   standalone: true,
   selector: 'app-category-cart',
-  imports: [CommonModule, ProductListComponent],
+  imports: [CommonModule, ProductListComponent, CartListComponent],
   templateUrl: './category-cart.component.html',
   styleUrls: ['./category-cart.component.css']
 })
@@ -32,5 +33,14 @@ export class CategoryCartComponent {
     });
   }
 
-
+  handleQuantityChange(event: { name: string; delta: number }) {
+    this.cart.update(cart => {
+      return cart.map(item =>
+        item.name === event.name
+          ? { ...item, quantity: item.quantity + event.delta }
+          : item
+      )
+        .filter(item => item.quantity > 0);
+    })
+  }
 }
