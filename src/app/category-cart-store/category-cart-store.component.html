@@ -1,0 +1,27 @@
+<h2>Products</h2>
+<ul>
+  @for (product of products; track product.name) {
+  <li>{{product.name}} - ${{product.price}}
+    <button (click)="addProduct(product)">Add to Cart</button>
+  </li>
+  }
+</ul>
+
+<h2>Shopping Cart</h2>
+@if (cartStore.cart().length === 0) {
+<p>Your cart is empty.</p>
+}@else {
+<ul>
+  @for (item of cartStore.cart(); track item.name) {
+  <li class="cart-item">
+    {{item.name}} - ${{item.price}} x {{item.quantity}} =
+    ${{item.price * item.quantity | number:'1.2-2'}}
+    <button (click)="updateQuantity(item.name, -1)">－</button>
+    <button (click)="updateQuantity(item.name, 1)">＋</button>
+  </li>
+  }
+</ul>
+<p>Total Count: {{totalCount()}}</p>
+<p>Total Price: {{totalPrice() | currency:'USD'}}</p>
+<button (click)="clearCart()">Clear Cart</button>
+}
