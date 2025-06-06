@@ -11,7 +11,7 @@ import { CartItemComponent } from "./cart-item.component";
 })
 
 export class CartListComponent {
-  readonly items = input<{ name: string; quantity: number }[]>();
+  readonly items = input<{ name: string; price: number; quantity: number }[]>();
   readonly update = output<{ name: string; delta: number }>();
 
   handleUpdate(payload: { name: string; delta: number }) {
