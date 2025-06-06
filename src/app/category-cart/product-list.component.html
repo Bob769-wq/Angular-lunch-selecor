@@ -1,6 +1,6 @@
 <h3>Product List</h3>
 <ul>
   @for (product of products(); track product) {
-  <app-product-item [name]="product" (add)="handleAdd(product)"></app-product-item>
+  <app-product-item [product]="product" (add)="handleAdd(product)"></app-product-item>
   }
 </ul>

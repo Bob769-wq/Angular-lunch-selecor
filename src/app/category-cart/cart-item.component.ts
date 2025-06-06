@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 
 export class CartItemComponent {
-  readonly item = input<{ name: string; quantity: number }>();
+  readonly item = input<{ name: string; price: number; quantity: number }>();
   readonly update = output<{ name: string; delta: number }>();
 
   add() {

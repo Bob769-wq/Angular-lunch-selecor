@@ -10,10 +10,10 @@ import { CommonModule } from "@angular/common";
 })
 
 export class ProductItemComponent {
-  @Input() name!: string;
-  @Output() add = new EventEmitter<string>();
+  @Input() product!: { name: string; price: number };
+  @Output() add = new EventEmitter<{ name: string; price: number }>();
 
   handleClick() {
-    this.add.emit(this.name);
+    this.add.emit(this.product);
   }
 }

@@ -12,23 +12,31 @@ import { CartListComponent } from './cart-list.component';
 })
 
 export class CategoryCartComponent {
-  products = signal(['Rice Ball', 'Dumpling', 'Ramen']);
+  products = signal([
+    { name: 'Rice Ball', price: 30 },
+    { name: 'Dumpling', price: 50 },
+    { name: 'Ramen', price: 80 }
+  ]);
 
-  cart = signal<{ name: string; quantity: number }[]>([]);
+  cart = signal<{ name: string; price: number; quantity: number }[]>([]);
 
   totalCount = computed(() =>
     this.cart().reduce((sum, item) => sum + item.quantity, 0)
   );
 
-  addToCart(product: string) {
+  totalPrice = computed(() =>
+    this.cart().reduce((sum, item) => sum + item.price * item.quantity, 0)
+  );
+
+  addToCart(product: { name: string; price: number }) {
     this.cart.update(cart => {
-      const existing = cart.find(item => item.name === product);
+      const existing = cart.find(item => item.name === product.name);
       if (existing) {
         return cart.map(item =>
-          item.name === product ? { ...item, quantity: item.quantity + 1 } : item
+          item.name === product.name ? { ...item, quantity: item.quantity + 1 } : item
         );
       } else {
-        return [...cart, { name: product, quantity: 1 }];
+        return [...cart, { ...product, quantity: 1 }];
       }
     });
   }
@@ -45,6 +53,10 @@ export class CategoryCartComponent {
           : item
       )
         .filter(item => item.quantity > 0);
-    })
+    });
+  }
+
+  clearCart() {
+    this.cart.set([]);
   }
 }

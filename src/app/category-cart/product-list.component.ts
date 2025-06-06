@@ -11,10 +11,10 @@ import { ProductItemComponent } from './product-item.component';
 })
 
 export class ProductListComponent {
-  readonly products = input<string[]>();
-  readonly add = output<string>();
+  readonly products = input<{ name: string; price: number }[]>();
+  readonly add = output<{ name: string; price: number }>();
 
-  handleAdd(name: string) {
-    this.add.emit(name);
+  handleAdd(product: { name: string; price: number }) {
+    this.add.emit(product);
   }
 }
