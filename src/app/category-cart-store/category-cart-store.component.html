@@ -11,16 +11,8 @@
 @if (cartStore.cart().length === 0) {
 <p>Your cart is empty.</p>
 }@else {
-<ul>
-  @for (item of cartStore.cart(); track item.name) {
-  <li class="cart-item">
-    {{item.name}} - ${{item.price}} x {{item.quantity}} =
-    ${{item.price * item.quantity | number:'1.2-2'}}
-    <button (click)="updateQuantity(item.name, -1)">－</button>
-    <button (click)="updateQuantity(item.name, 1)">＋</button>
-  </li>
-  }
-</ul>
+<app-cart-list [items]="cartStore.cart()" (updateQuantity)="updateQuantity($event.name, $event.delta)">
+</app-cart-list>
 <p>Total Count: {{totalCount()}}</p>
 <p>Total Price: {{totalPrice() | currency:'USD'}}</p>
 <button (click)="clearCart()">Clear Cart</button>

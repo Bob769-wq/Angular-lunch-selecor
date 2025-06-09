@@ -1,0 +1,6 @@
+<li class="cart-item">
+    {{item.name}} - ${{item.price}} x {{item.quantity}} =
+    ${{item.price * item.quantity | number: '1.2-2'}}
+    <button (click)="onDecrease()">-</button>
+    <button (click)="onIncrease()">+</button>
+</li>

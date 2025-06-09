@@ -1,12 +1,12 @@
-import { CategoryCartComponent } from './../category-cart/category-cart.component';
 import { Component, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartStoreService, CartItem } from './cart-store.service';
+import { CartListComponent } from './cart-list.component';
 
 @Component({
   standalone: true,
   selector: 'app-category-cart-store',
-  imports: [CommonModule],
+  imports: [CommonModule, CartListComponent],
   templateUrl: './category-cart-store.component.html',
   styleUrls: ['./category-cart-store.component.css']
 })
