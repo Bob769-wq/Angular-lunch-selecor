@@ -5,8 +5,20 @@ import { CommonModule } from "@angular/common";
   standalone: true,
   selector: 'app-product-item',
   imports: [CommonModule],
-  templateUrl: './product-item.component.html',
-  styleUrls: ['./product-item.component.css']
+  template: `
+  <li (click)="handleClick()" class="item">{{product.name}} - {{product.price | currency:'USD'}}</li>
+  `,
+  styles: `
+  .item {
+  cursor: pointer;
+  padding: 4px;
+  transition: background .2s;
+}
+
+.item:hover {
+  background-color: #f0f0f0;
+}
+  `
 })
 
 export class ProductItemComponent {

@@ -7,8 +7,26 @@ import { CartListComponent } from './cart-list.component';
   standalone: true,
   selector: 'app-category-cart',
   imports: [CommonModule, ProductListComponent, CartListComponent],
-  templateUrl: './category-cart.component.html',
-  styleUrls: ['./category-cart.component.css']
+  template: `
+  <h2>Category Cart Root</h2>
+  <app-product-list [products]="products()" (add)="addToCart($event)"></app-product-list>
+
+  <h3>Cart Items (Total: {{totalCount()}})</h3>
+
+  @if (cart().length === 0) {
+  <p>Your cart is empty.</p>
+  } @else {
+  <app-cart-list [items]="cart()" (update)="handleQuantityChange($event)">
+  </app-cart-list>
+  <p>Total Price: {{ totalPrice() | currency:'USD'}}</p>
+  <button (click)="clearCart()">Clear Cart</button>
+}
+  `,
+  styles: `
+  h2 {
+  color: #2c3e50;
+}
+  `
 })
 
 export class CategoryCartComponent {

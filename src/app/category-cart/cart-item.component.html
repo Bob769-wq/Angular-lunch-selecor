@@ -1,7 +1,0 @@
-<li class="cart-item">
-  {{item()?.name}} - ${{item()?.price}} X {{item()?.quantity}} =
-  ${{item()!.price * item()!.quantity | number: '1.2-2'}}
-  <button (click)="subtract()">－</button>
-  <button (click)="add()">＋</button>
-  <button (click)="deleteItem()">🗑️</button>
-</li>

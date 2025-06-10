@@ -1,13 +1,22 @@
 import { Component, input, output } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { CartItemComponent } from "./cart-item.component";
+import {CartItemComponent} from "./cart-item.component"
 
 @Component({
   selector: 'app-cart-list',
   standalone: true,
   imports: [CommonModule, CartItemComponent],
-  templateUrl: './cart-list.component.html',
-  styleUrls: ['./cart-list.component.css']
+  template: `
+  <h3>Cart Items</h3>
+
+<ul>
+  @for (item of items(); track item.name) {
+  <app-cart-item [item]="item" (update)="handleUpdate($event)">
+  </app-cart-item>
+  }
+</ul>
+  `,
+  styles: ``
 })
 
 export class CartListComponent {

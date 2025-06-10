@@ -5,8 +5,26 @@ import { CommonModule } from '@angular/common';
   selector: 'app-cart-item',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './cart-item.component.html',
-  styleUrls: ['./cart-item.component.css']
+  template: `
+  <li class="cart-item">
+  {{item()?.name}} - $ {{item()?.price}} X {{item()?.quantity}} =
+  $ {{(item()!.price * item()!.quantity) | number: '1.2-2'}}
+  <button (click)="subtract()">－</button>
+  <button (click)="add()">＋</button>
+  <button (click)="deleteItem()">🗑️</button>
+  </li>
+  `,
+  styles: `
+  .cart-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  }
+
+button {
+  padding: 2px 6px;
+}
+  `
 })
 
 export class CartItemComponent {
