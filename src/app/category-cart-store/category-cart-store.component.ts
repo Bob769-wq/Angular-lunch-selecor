@@ -7,8 +7,28 @@ import { CartListComponent } from './cart-list.component';
   standalone: true,
   selector: 'app-category-cart-store',
   imports: [CommonModule, CartListComponent],
-  templateUrl: './category-cart-store.component.html',
-  styleUrls: ['./category-cart-store.component.css']
+  template:`
+  <h2>Products</h2>
+  <ul>
+  @for (product of products; track product.name) {
+  <li>{{product.name}} - $ {{product.price}}
+    <button (click)="addProduct(product)">Add to Cart</button>
+  </li>
+  }
+  </ul>
+
+  <h2>Shopping Cart</h2>
+  @if (cartStore.cart().length === 0) {
+  <p>Your cart is empty.</p>
+  }@else {
+  <app-cart-list [items]="cartStore.cart()" (updateQuantity)="updateQuantity($event.name, $event.delta)">
+  </app-cart-list>
+  <p>Total Count: {{totalCount()}}</p>
+  <p>Total Price: {{totalPrice() | currency:'USD'}}</p>
+  <button (click)="clearCart()">Clear Cart</button>
+  }
+  `,
+  styles: ``
 })
 
 export class CategoryCartStoreComponent {

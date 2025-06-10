@@ -6,8 +6,15 @@ import { CommonModule } from "@angular/common";
     standalone:true,
     selector:'app-cart-item',
     imports:[CommonModule],
-    templateUrl:'./cart-item.component.html',
-    styleUrls:['./cart-item.component.css'], 
+    template:`
+    <li class="cart-item">
+    {{item.name}} - $ {{item.price}} x {{item.quantity}} =
+    $ {{item.price * item.quantity | number: '1.2-2'}}
+    <button (click)="onDecrease()">-</button>
+    <button (click)="onIncrease()">+</button>
+    </li>
+    `,
+    styles:``, 
 })
 
 export class CartItemComponent {

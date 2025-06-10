@@ -1,6 +1,0 @@
-<ul>
-    @for (item of items; track item.name) {
-        <app-cart-item [item]="item" (updateQuantity)="onUpdate(item.name, $event)">
-        </app-cart-item>
-    }
-</ul>

@@ -7,8 +7,15 @@ import { CartItemComponent } from "./cart-item.component";
     standalone:true,
     selector:'app-cart-list',
     imports:[CommonModule,CartItemComponent],
-    templateUrl:'./cart-list.component.html',
-    styleUrls:['./cart-list.component.css']
+    template:`
+    <ul>
+    @for (item of items; track item.name) {
+        <app-cart-item [item]="item" (updateQuantity)="onUpdate(item.name, $event)">
+        </app-cart-item>
+    }
+    </ul>
+    `,
+    styles:``
 })
 
 export class CartListComponent {
