@@ -5,5 +5,5 @@ import { CategoryCartStoreComponent } from './app/category-cart-store/category-c
 import { AppComponent } from './app/app.component';
 
 
-bootstrapApplication(AppComponent)
+bootstrapApplication(CategoryExclusiveComponent)
   .catch((err) => console.error(err));

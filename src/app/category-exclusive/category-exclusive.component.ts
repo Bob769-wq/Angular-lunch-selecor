@@ -6,8 +6,14 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   selector: 'app-category-exclusive',
   imports: [CommonModule, CategoryItemComponent],
-  templateUrl: './category-exclusive.component.html',
-  styleUrls: ['./category-exclusive.component.css']
+  template: `
+  <h2>Category List (expand one only)</h2>
+  @for (cat of categories(); track cat.name) {
+  <app-category-item [category]="cat" [expanded]="expandedCategory()===cat.name"
+  (toggle)="toggleCategory(cat.name)"></app-category-item>
+  }
+  `,
+  styles: ``
 })
 
 export class CategoryExclusiveComponent {

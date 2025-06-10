@@ -1,5 +1,0 @@
-<h2>Category List (expand one only)</h2>
-@for (cat of categories(); track cat.name) {
-<app-category-item [category]="cat" [expanded]="expandedCategory()===cat.name"
-  (toggle)="toggleCategory(cat.name)"></app-category-item>
-}

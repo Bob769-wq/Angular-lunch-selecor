@@ -5,8 +5,43 @@ import { CommonModule } from "@angular/common";
   standalone: true,
   selector: 'app-category-item',
   imports: [CommonModule],
-  templateUrl: './category-item.component.html',
-  styleUrls: ['./category-item.component.css']
+  template: `
+  <h3 (click)="toggle.emit()">
+  {{category()?.name}} ({{expanded()? 'expand': 'collapse'}})
+  </h3>
+
+  @if (expanded()) {
+  <div>
+  <ul>
+    @for (item of category()?.items??[]; track item) {
+    <li>{{item}}</li>
+    }
+  </ul>
+  </div>
+  }
+  `,
+  styles: `
+  h3 {
+  cursor: pointer;
+  user-select: none;
+  padding: .5rem;
+  background-color: #f2f2f2;
+  margin: 0;
+  }
+
+  h3:hover {
+  background-color: #e0e0e0;
+  }
+
+  ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  }
+
+  li {
+  line-height: 1.5;
+  }
+  `
 })
 
 export class CategoryItemComponent {
