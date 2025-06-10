@@ -31,12 +31,12 @@ import { CartListComponent } from './cart-list.component';
 
 export class CategoryCartComponent {
   products = signal([
-    { name: 'Rice Ball', price: 30 },
-    { name: 'Dumpling', price: 50 },
-    { name: 'Ramen', price: 80 }
+    { id:1, name: 'Rice Ball', price: 30 },
+    { id:2, name: 'Dumpling', price: 50 },
+    { id:3, name: 'Ramen', price: 80 }
   ]);
 
-  cart = signal<{ name: string; price: number; quantity: number }[]>([]);
+  cart = signal<{ id:number; name: string; price: number; quantity: number }[]>([]);
 
   totalCount = computed(() =>
     this.cart().reduce((sum, item) => sum + item.quantity, 0)
@@ -46,7 +46,7 @@ export class CategoryCartComponent {
     this.cart().reduce((sum, item) => sum + item.price * item.quantity, 0)
   );
 
-  addToCart(product: { name: string; price: number }) {
+  addToCart(product: { id:number; name: string; price: number }) {
     this.cart.update(cart => {
       const existing = cart.find(item => item.name === product.name);
       if (existing) {

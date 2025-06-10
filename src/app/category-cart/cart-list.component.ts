@@ -10,7 +10,7 @@ import {CartItemComponent} from "./cart-item.component"
   <h3>Cart Items</h3>
 
 <ul>
-  @for (item of items(); track item.name) {
+  @for (item of items(); track item.id) {
   <app-cart-item [item]="item" (update)="handleUpdate($event)">
   </app-cart-item>
   }
@@ -20,7 +20,7 @@ import {CartItemComponent} from "./cart-item.component"
 })
 
 export class CartListComponent {
-  readonly items = input<{ name: string; price: number; quantity: number }[]>();
+  readonly items = input.required<{ id: number; name: string; price: number; quantity: number }[]>();
   readonly update = output<{ name: string; delta: number }>();
 
   handleUpdate(payload: { name: string; delta: number }) {

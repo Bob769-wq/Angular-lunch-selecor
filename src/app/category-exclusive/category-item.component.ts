@@ -7,13 +7,13 @@ import { CommonModule } from "@angular/common";
   imports: [CommonModule],
   template: `
   <h3 (click)="toggle.emit()">
-  {{category()?.name}} ({{expanded()? 'expand': 'collapse'}})
+  {{category().name}} ({{expanded()? 'expand': 'collapse'}})
   </h3>
 
   @if (expanded()) {
   <div>
   <ul>
-    @for (item of category()?.items??[]; track item) {
+    @for (item of category().items; track item) {
     <li>{{item}}</li>
     }
   </ul>
@@ -45,7 +45,7 @@ import { CommonModule } from "@angular/common";
 })
 
 export class CategoryItemComponent {
-  readonly category = input<{ name: string; items: string[] }>();
-  readonly expanded = input<boolean>();
+  readonly category = input.required<{ id:number; name: string; items: string[] }>();
+  readonly expanded = input.required<boolean>();
   @Output() toggle = new EventEmitter<void>();
 }

@@ -9,7 +9,7 @@ import { CartItemComponent } from "./cart-item.component";
     imports:[CommonModule,CartItemComponent],
     template:`
     <ul>
-    @for (item of items; track item.name) {
+    @for (item of items; track item.id) {
         <app-cart-item [item]="item" (updateQuantity)="onUpdate(item.name, $event)">
         </app-cart-item>
     }

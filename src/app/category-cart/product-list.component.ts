@@ -9,7 +9,7 @@ import { ProductItemComponent } from './product-item.component';
   template: `
   <h3>Product List</h3>
   <ul>
-  @for (product of products(); track product) {
+  @for (product of products(); track product.id) {
   <app-product-item [product]="product" (add)="handleAdd(product)"></app-product-item>
   }
   </ul>
@@ -30,10 +30,10 @@ li {
 })
 
 export class ProductListComponent {
-  readonly products = input<{ name: string; price: number }[]>();
-  readonly add = output<{ name: string; price: number }>();
+  readonly products = input.required<{ id: number; name: string; price: number }[]>();
+  readonly add = output<{ id:number; name: string; price: number }>();
 
-  handleAdd(product: { name: string; price: number }) {
+  handleAdd(product: { id: number; name: string; price: number }) {
     this.add.emit(product);
   }
 }

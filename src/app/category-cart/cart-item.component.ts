@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   template: `
   <li class="cart-item">
-  {{item()?.name}} - $ {{item()?.price}} X {{item()?.quantity}} =
+  {{item().name}} - $ {{item().price}} X {{item().quantity}} =
   $ {{(item()!.price * item()!.quantity) | number: '1.2-2'}}
   <button (click)="subtract()">－</button>
   <button (click)="add()">＋</button>
@@ -28,7 +28,7 @@ button {
 })
 
 export class CartItemComponent {
-  readonly item = input<{ name: string; price: number; quantity: number }>();
+  readonly item = input.required<{ id: number; name: string; price: number; quantity: number }>();
   readonly update = output<{ name: string; delta: number }>();
 
   add() {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output, input } from "@angular/core";
 import { CartItem } from "./cart-store.service";
 import { CommonModule } from "@angular/common";
 
@@ -18,7 +18,7 @@ import { CommonModule } from "@angular/common";
 })
 
 export class CartItemComponent {
-    @Input () item! : CartItem;
+    @Input() item!: CartItem
     @Output () updateQuantity = new EventEmitter<number>();
 
     onIncrease() {

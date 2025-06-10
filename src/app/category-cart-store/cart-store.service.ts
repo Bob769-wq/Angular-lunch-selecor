@@ -1,6 +1,7 @@
 import { Injectable, signal} from '@angular/core';
 
 export interface CartItem {
+  id: number;
   name: string;
   price: number;
   quantity: number;
@@ -12,7 +13,7 @@ export class CartStoreService {
 
   readonly cart = this._cart;
 
-  addToCart(product: { name: string; price: number }) {
+  addToCart(product: { id: number; name: string; price: number }) {
     this._cart.update(cart => {
       const existing = cart.find(item => item.name === product.name);
       if (existing) {

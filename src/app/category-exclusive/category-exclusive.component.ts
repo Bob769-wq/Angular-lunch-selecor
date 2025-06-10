@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule, CategoryItemComponent],
   template: `
   <h2>Category List (expand one only)</h2>
-  @for (cat of categories(); track cat.name) {
+  @for (cat of categories(); track cat.id) {
   <app-category-item [category]="cat" [expanded]="expandedCategory()===cat.name"
   (toggle)="toggleCategory(cat.name)"></app-category-item>
   }
@@ -18,9 +18,9 @@ import { CommonModule } from '@angular/common';
 
 export class CategoryExclusiveComponent {
   categories = signal([
-    { name: 'main', items: ['rice', 'noodle', 'dumpling'] },
-    { name: 'drinks', items: ['tea', 'coffee', 'milk'] },
-    { name: 'desserts', items: ['cake', 'pudding', 'ice-cream'] }
+    { id:1, name: 'main', items: ['rice', 'noodle', 'dumpling'] },
+    { id:2, name: 'drinks', items: ['tea', 'coffee', 'milk'] },
+    { id:3, name: 'desserts', items: ['cake', 'pudding', 'ice-cream'] }
   ]);
 
   expandedCategory = signal<string | null>(null);

@@ -1,4 +1,4 @@
-import { Component, computed } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartStoreService, CartItem } from './cart-store.service';
 import { CartListComponent } from './cart-list.component';
@@ -10,7 +10,7 @@ import { CartListComponent } from './cart-list.component';
   template:`
   <h2>Products</h2>
   <ul>
-  @for (product of products; track product.name) {
+  @for (product of products; track product.id) {
   <li>{{product.name}} - $ {{product.price}}
     <button (click)="addProduct(product)">Add to Cart</button>
   </li>
@@ -33,12 +33,12 @@ import { CartListComponent } from './cart-list.component';
 
 export class CategoryCartStoreComponent {
   products = [
-    { name: 'Rice Ball', price: 30 },
-    { name: 'Dumpling', price: 50 },
-    { name: 'Ramen', price: 80 }
+    { id: 1, name: 'Rice Ball', price: 30 },
+    { id: 2, name: 'Dumpling', price: 50 },
+    { id: 3, name: 'Ramen', price: 80 }
   ];
 
-  constructor(public cartStore: CartStoreService) { }
+  readonly cartStore =inject(CartStoreService);
 
   totalCount = computed(() =>
     this.cartStore.cart().reduce((sum, item) => sum + item.quantity, 0));
@@ -47,7 +47,7 @@ export class CategoryCartStoreComponent {
     this.cartStore.cart().reduce((sum, item) => sum + item.price * item.quantity, 0)
   );
 
-  addProduct(product: { name: string; price: number }) {
+  addProduct(product: { id: number; name: string; price: number }) {
     this.cartStore.addToCart(product);
   }
 
