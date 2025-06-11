@@ -32,7 +32,17 @@ import { FilterType, TodoStoreService } from "./todo.service";
         @for (todo of visibleTodos(); track todo.id) {
             <li>
                 <input type="checkbox" [checked]="todo.done" (change)="toggle(todo.id)" />
-                <span [class.done]="todo.done ? 'line-through' : 'none'">{{todo.title}}</span>
+                @if(editingId()===todo.id) {
+                    <input [value]="todo.title"
+                    (input)="editedTitle.set($any($event.target).value)"
+                    (keydown.enter)="saveEdit(todo.id)"
+                    (blur)="cancelEdit()" />
+                } @else {
+                    <span [class.done]="todo.done "
+                    (dblclick)="startEdit(todo.id, todo.title)">
+                    {{todo.title}}
+                    </span>
+                }
                 <button (click)="remove(todo.id)">x</button>
             </li>
         }
@@ -58,6 +68,25 @@ export class TodoAppComponent {
 
     input = signal('');
     filter = this.todoStore.filter;
+    editedTitle = signal('');
+    editingId = signal<number | null>(null);
+
+    startEdit(id:number, currentTitle:string) {
+        this.editingId.set(id);
+        this.editedTitle.set(currentTitle)
+    }
+
+    saveEdit(id:number) {
+        const newTitle = this.editedTitle().trim();
+        if(newTitle) {
+            this.todoStore.updateTitle(id, newTitle);
+        }
+        this.editingId.set(null);
+    }
+
+    cancelEdit() {
+        this.editingId.set(null);
+    }
 
     visibleTodos = computed(()=>{
         const list = this.todoStore.todos();

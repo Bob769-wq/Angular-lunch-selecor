@@ -42,4 +42,12 @@ export class TodoStoreService {
    setFilter(filter:FilterType) {
     this.filter.set(filter);
    }
+
+   updateTitle(id: number, newTitle: string) {
+    this.todos.update(list =>
+        list.map(todo=>
+            todo.id ===id? {...todo, title: newTitle}:todo
+        )
+    );
+   }
 }
